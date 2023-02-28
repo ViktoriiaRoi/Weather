@@ -53,8 +53,8 @@ class WeatherFragment : Fragment() {
         binding.swipeRefreshLayout.isRefreshing = state.isLoading
         binding.emptyWeatherTv.isVisible = !state.isLoading && state.weather == null
 
-        state.weather?.let {
-            binding.dateTv.text = DateUtils.timestampToDate(it.timestamp)
+        state.weather?.timestamp?.let {
+            binding.dateTv.text = DateUtils.timestampToDate(it)
         }
 
         state.errorMessage?.let {

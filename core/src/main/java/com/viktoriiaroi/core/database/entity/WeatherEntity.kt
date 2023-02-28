@@ -23,11 +23,11 @@ class WeatherEntity(
     @ColumnInfo(name = "humidity")
     val humidity: Int? = null,
     @ColumnInfo(name = "city")
-    val city: String,
+    val city: String? = null,
     @ColumnInfo(name = "country")
-    val country: String,
+    val country: String? = null,
     @ColumnInfo(name = "timestamp")
-    val timestamp: Int,
+    val timestamp: Int? = null,
 ) {
     companion object {
         fun fromModel(src: Weather) = WeatherEntity(
