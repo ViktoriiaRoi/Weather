@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.viktoriiaroi.core.model.Weather
 
-@Entity(tableName = "company")
+@Entity(tableName = "weather")
 class WeatherEntity(
     @PrimaryKey
     @ColumnInfo(name = "id")

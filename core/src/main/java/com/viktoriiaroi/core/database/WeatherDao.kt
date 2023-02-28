@@ -8,8 +8,11 @@ import com.viktoriiaroi.core.database.entity.WeatherEntity
 
 @Dao
 interface WeatherDao {
-    @Query("SELECT * FROM company LIMIT 1")
+    @Query("SELECT * FROM weather LIMIT 1")
     suspend fun getWeather(): WeatherEntity?
+
+    @Query("SELECT city FROM weather LIMIT 1")
+    suspend fun getCityName(): String?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertWeather(weather: WeatherEntity)

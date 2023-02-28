@@ -27,6 +27,8 @@ class WeatherRepository @Inject constructor(
             Pair(fetchWeatherFromDatabase(), it)
         })
 
+    suspend fun fetchCityName(): String? = weatherDao.getCityName()
+
     private suspend fun fetchWeatherFromNetwork(city: String, units: Units): Result<Weather> =
         try {
             val response = weatherService.fetchWeather(city, API_KEY, units)
