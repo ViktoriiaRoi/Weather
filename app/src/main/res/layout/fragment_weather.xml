@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="weather"
+            type="com.viktoriiaroi.core.model.Weather" />
+
+        <variable
+            name="isLoading"
+            type="Boolean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.weather.WeatherFragment">
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:isVisible="@{isLoading}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="gone" />
+
+        <TextView
+            android:id="@+id/empty_weather_tv"
+            style="@style/MainText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:isVisible="@{!isLoading &amp;&amp; weather == null}"
+            android:text="@string/empty_weather_msg"
+            android:textSize="@dimen/small_text_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="gone" />
+
+        <TextView
+            android:id="@+id/location_tv"
+            style="@style/MainText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_from_edge"
+            android:isVisible="@{!isLoading &amp;&amp; weather != null}"
+            android:text="@{@string/location(weather.city, weather.country)}"
+            android:textSize="@dimen/big_text_size"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Lviv, UA" />
+
+        <TextView
+            android:id="@+id/date_tv"
+            style="@style/SecondaryText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_between_views"
+            android:isVisible="@{!isLoading &amp;&amp; weather != null}"
+            android:textSize="@dimen/small_text_size"
+            app:layout_constraintStart_toStartOf="@+id/location_tv"
+            app:layout_constraintTop_toBottomOf="@+id/location_tv"
+            tools:text="Jun 30 14:59" />
+
+        <ImageView
+            android:id="@+id/weather_img"
+            android:layout_width="100dp"
+            android:loadImage="@{weather.iconCode}"
+            android:layout_height="100dp"
+            android:contentDescription="@string/icon_description"
+            android:isVisible="@{!isLoading &amp;&amp; weather.iconCode != null}"
+            app:layout_constraintBottom_toBottomOf="@+id/temp_tv"
+            app:layout_constraintEnd_toStartOf="@+id/temp_tv"
+            app:layout_constraintTop_toTopOf="@+id/temp_tv" />
+
+        <TextView
+            android:id="@+id/temp_tv"
+            style="@style/MainText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:isVisible="@{!isLoading &amp;&amp; weather.temp != null}"
+            android:text="@{weather.temp.toString()}"
+            android:textSize="50sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/description_tv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="14" />
+
+        <TextView
+            android:id="@+id/degrees_tv"
+            style="@style/MainText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter"
+            android:isVisible="@{!isLoading &amp;&amp; weather.temp != null}"
+            android:text="@string/degrees"
+            android:textSize="@dimen/big_text_size"
+            app:layout_constraintStart_toEndOf="@+id/temp_tv"
+            app:layout_constraintTop_toTopOf="@+id/temp_tv" />
+
+        <TextView
+            android:id="@+id/description_tv"
+            style="@style/MainText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_between_views"
+            android:isVisible="@{!isLoading &amp;&amp; weather.description != null}"
+            android:text="@{weather.description}"
+            android:textSize="@dimen/big_text_size"
+            app:layout_constraintBottom_toTopOf="@id/feels_like_tv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/temp_tv"
+            tools:text="Overcast clouds" />
+
+        <TextView
+            android:id="@+id/feels_like_tv"
+            style="@style/MainText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:isVisible="@{!isLoading &amp;&amp; weather.feelsLike != null}"
+            android:text="@{@string/feels_like(weather.feelsLike)}"
+            android:textSize="@dimen/small_text_size"
+            app:layout_constraintBottom_toTopOf="@id/wind_tv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/description_tv"
+            tools:text="Feels like: 10°" />
+
+        <TextView
+            android:id="@+id/wind_tv"
+            style="@style/MainText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_between_views"
+            android:isVisible="@{!isLoading &amp;&amp; weather.wind != null}"
+            android:text="@{@string/wind(weather.wind)}"
+            android:textSize="@dimen/small_text_size"
+            app:layout_constraintBottom_toTopOf="@id/humidity_tv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/feels_like_tv"
+            tools:text="Wind: 3m/s" />
+
+        <TextView
+            android:id="@+id/humidity_tv"
+            style="@style/MainText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_between_views"
+            android:isVisible="@{!isLoading &amp;&amp; weather.humidity != null}"
+            android:text="@{@string/humidity(weather.humidity)}"
+            android:textSize="@dimen/small_text_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/wind_tv"
+            tools:text="Humidity: 57%" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

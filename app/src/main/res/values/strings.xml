@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">Weather</string>
+
+    <string name="search_item">Search</string>
+    <string name="search_hint">Enter city</string>
+
+    <string name="location">%1$s, %2$s</string>
+    <string name="degrees">° C</string>
+    <string name="feels_like">Feels like: %d°</string>
+    <string name="wind">Wind: %dm/s</string>
+    <string name="humidity">Humidity: %d%%</string>
+
+    <string name="icon_description">Weather icon</string>
+    <string name="empty_weather_msg">To see the current weather,\nenter the city in the search bar</string>
 </resources>
